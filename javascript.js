@@ -12,7 +12,9 @@ $(function(){
 var startTime;
 
 var startTimer = function(totalMinutes){
-  var delay = 1000  // in milliseconds
+  var singlePeriod = 1000  // in milliseconds
+  var doublePeriod = singlePeriod * 2
+  var period // Will be set to either singlePeriod or doublePeriod
   var talker = ''
   var jenniferTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var jackTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
@@ -79,18 +81,21 @@ var startTimer = function(totalMinutes){
 
     var focusOnJack = function(){
       talker = 'jack'
+      period = singlePeriod
       removeActiveClass()
       $jack.addClass(activeClass)
     }
 
     var focusOnJennifer = function(){
       talker = 'jennifer'
+      period = singlePeriod
       removeActiveClass()
       $jennifer.addClass(activeClass)
     }
 
     var focusOnBoth = function(){
       talker = 'both'
+      period = doublePeriod
       removeActiveClass()
       $both.addClass(activeClass)
     }
@@ -105,7 +110,7 @@ var startTimer = function(totalMinutes){
   var update = function(){
     subtractTime()
     display()
-    setTimeout(update, delay)
+    setTimeout(update, period)
     console.log('hello')
   }
 
