@@ -13,7 +13,7 @@ var startTime;
 
 var startTimer = function(totalMinutes){
   var delay = 1000  // in milliseconds
-  var talker = 'jack'
+  var talker = ''
   var jenniferTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var jackTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var timeOfLastUpdate = null
@@ -50,10 +50,19 @@ var startTimer = function(totalMinutes){
   }
 
   var formattedTime = function(time){
-    var totalSeconds = Math.ceil(time / 1000)
-    var totalMinutes = Math.floor(totalSeconds / 60)
-    var displaySeconds = totalSeconds % 60
-    return totalMinutes + ':' + zeroPad(displaySeconds)
+    var sign, totalSeconds, totalMinutes, displaySeconds
+
+    if (time < 0){
+      sign = '-'
+      time = -time
+    }else{
+      sign = ''
+    }
+
+    totalSeconds = Math.ceil(time / 1000)
+    totalMinutes = Math.floor(totalSeconds / 60)
+    displaySeconds = totalSeconds % 60
+    return sign + totalMinutes + ':' + zeroPad(displaySeconds)
   }
 
 
