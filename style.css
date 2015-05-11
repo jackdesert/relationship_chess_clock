@@ -4,6 +4,10 @@ div, h1{
   color: #333;
 }
 
+.clear{
+  clear: both;
+}
+
 #container{
   margin: 0.5rem;
   padding: 0;
@@ -16,21 +20,36 @@ h1{
 }
 
 .time{
+  font-size: 11rem;
   text-align: center;
-  padding-top: 0rem;
+  padding-top: 2rem;
 }
 
 .clickable{
   background-color: #eee;
 }
+.holdable{
+  background-color: #55f;
+}
+
+.holdable .text{
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+}
+
 .clickable.active{
   background-color: #aaa;
+}
+.holdable:active{
+  background-color: #999;
 }
 
 
 #both{
-  width: 18%;
+  width: 28%;
   margin: 0 auto;
+  padding: 2rem 0;
   text-align: center;
 }
 #both .text{
@@ -45,8 +64,14 @@ h1{
   width: 40%;
 }
 
-.conversationalist-holder, #both{
+.clickable, .holdable{
   border: 3px solid #ccc;
+}
+
+#more{
+  width: 8rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 

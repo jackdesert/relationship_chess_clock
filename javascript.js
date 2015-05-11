@@ -9,9 +9,10 @@ $(function(){
 
 })
 
-var startTime;
 
 var startTimer = function(totalMinutes){
+  var minutesToAdd = 5
+  var longClickTime = 1000 // in milliseconds
   var singlePeriod = 1000  // in milliseconds
   var doublePeriod = singlePeriod * 2
   var period // Will be set to either singlePeriod or doublePeriod
@@ -19,6 +20,7 @@ var startTimer = function(totalMinutes){
   var jenniferTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var jackTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var timeOfLastUpdate = null
+  var buttonIsDown = false
 
   var subtractTime = function(){
     var now = Date.now()
@@ -67,13 +69,21 @@ var startTimer = function(totalMinutes){
     return sign + totalMinutes + ':' + zeroPad(displaySeconds)
   }
 
+  var addMoreTime = function(){
+    var millisecondsToAdd = minutesToAdd * 60 * 1000
+    jenniferTime += millisecondsToAdd
+    jackTime += millisecondsToAdd
+    display()
+  }
+
+
 
   var initialize = function(){
-    timeOfLastUpdate = Date.now()
-    $jack = $('#jack')
-    $jennifer = $('#jennifer')
-    $both = $('#both')
-    activeClass = 'active'
+    var $jack = $('#jack')
+    var $jennifer = $('#jennifer')
+    var $both = $('#both')
+    var $more = $('#more')
+    var activeClass = 'active'
 
     var removeActiveClass = function(){
       $('.clickable').removeClass(activeClass)
@@ -100,28 +110,51 @@ var startTimer = function(totalMinutes){
       $both.addClass(activeClass)
     }
 
+    var addMoreTimeIfButtonStillDown = function(){
+      if (buttonIsDown === true){
+        addMoreTime()
+        setTimeout(addMoreTimeIfButtonStillDown, longClickTime)
+      }
+    }
+
+    var moreTimeButtonDown = function(){
+      buttonIsDown = true
+      setTimeout(addMoreTimeIfButtonStillDown, longClickTime)
+    }
+
+    var moreTimeButtonUp = function(){
+      buttonIsDown = false
+    }
+
+
+    timeOfLastUpdate = Date.now()
+
     $jack.on('click', focusOnJack)
     $jennifer.on('click', focusOnJennifer)
     $both.on('click', focusOnBoth)
 
+    $more.on('mousedown', moreTimeButtonDown)
+    $more.on('mouseup', moreTimeButtonUp)
+
   }
+
 
 
   var update = function(){
     subtractTime()
-    display()
+
+    if( buttonIsDown === false){
+      // Only call display() here when button is not down
+      // This eliminates double display() calls which appear confusing
+      display()
+    }
+
     setTimeout(update, period)
     console.log('hello')
   }
 
-
-
-
-
-
   initialize()
   update()
-
 
 }
 
