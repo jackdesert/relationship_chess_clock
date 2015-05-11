@@ -20,7 +20,7 @@ h1{
 }
 
 .time{
-  font-size: 11rem;
+  font-size: 8rem;
   text-align: center;
   padding-top: 2rem;
 }
@@ -30,6 +30,18 @@ h1{
 }
 .holdable{
   background-color: #55f;
+
+  /* Make sure this div is not selectable*/
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.holdable, .clickable{
+box-shadow: 0.2rem 0.2rem 0.5rem #888;
 }
 
 .holdable .text{
@@ -47,9 +59,9 @@ h1{
 
 
 #both{
-  width: 28%;
+  width: 50%;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 1rem 0;
   text-align: center;
 }
 #both .text{
@@ -69,7 +81,7 @@ h1{
 }
 
 #more{
-  width: 8rem;
+  width: 50%;
   margin: 0 auto;
   text-align: center;
 }

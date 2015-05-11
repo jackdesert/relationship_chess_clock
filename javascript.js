@@ -83,6 +83,7 @@ var startTimer = function(totalMinutes){
     var $jennifer = $('#jennifer')
     var $both = $('#both')
     var $more = $('#more')
+    var $body = $('body')
     var activeClass = 'active'
 
     var removeActiveClass = function(){
@@ -134,7 +135,8 @@ var startTimer = function(totalMinutes){
     $both.on('click', focusOnBoth)
 
     $more.on('mousedown', moreTimeButtonDown)
-    $more.on('mouseup', moreTimeButtonUp)
+    // Android browser appears not issue mouseup, so adding touchend
+    $body.on('mouseup touchend', moreTimeButtonUp)
 
   }
 
