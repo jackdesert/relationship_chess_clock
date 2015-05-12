@@ -2,7 +2,11 @@ div{
   font-size: 4rem;
 }
 div, h1{
-  color: #333;
+  color: #555;
+}
+
+a, a:visited{
+  color: inherit;
 }
 
 .clear{
