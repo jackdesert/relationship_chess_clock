@@ -119,8 +119,14 @@ var startTimer = function(totalMinutes){
     }
 
     var moreTimeButtonDown = function(){
+      var originalButtonIsDown = buttonIsDown
       buttonIsDown = true
-      setTimeout(addMoreTimeIfButtonStillDown, longClickTime)
+
+      if (originalButtonIsDown === false){
+        // prevent double-calling this by checking whether button was already down
+        // (mousedown and touchstart will both activate this in Android)
+        setTimeout(addMoreTimeIfButtonStillDown, longClickTime)
+      }
     }
 
     var moreTimeButtonUp = function(){
@@ -134,7 +140,8 @@ var startTimer = function(totalMinutes){
     $jennifer.on('click', focusOnJennifer)
     $both.on('click', focusOnBoth)
 
-    $more.on('mousedown', moreTimeButtonDown)
+    // iOS browser (safari) does not recognize mousedown, so adding touchstart
+    $more.on('mousedown touchstart', moreTimeButtonDown)
     // Android browser appears not issue mouseup, so adding touchend
     $body.on('mouseup touchend', moreTimeButtonUp)
 

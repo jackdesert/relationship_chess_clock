@@ -1,6 +1,7 @@
-
-div, h1{
+div{
   font-size: 4rem;
+}
+div, h1{
   color: #333;
 }
 
@@ -16,7 +17,8 @@ div, h1{
 h1{
   color: brown;
   text-align: center;
-  display: none; /* need the vertical space on smartphone*/
+  font-size: 6rem;
+  padding-top: 4rem;
 }
 
 .time{
@@ -93,4 +95,13 @@ box-shadow: 0.2rem 0.2rem 0.5rem #888;
   text-align: center;
   padding-top: 0rem;
   padding-bottom: 6rem;
+}
+
+.info{
+  font-size: 2rem;
+  text-align: center;
+}
+
+#refresh-message{
+  padding-bottom: 2rem;
 }
