@@ -30,8 +30,13 @@ h1{
 .clickable{
   background-color: #eee;
 }
+
 .holdable{
   background-color: #55f;
+}
+
+.holdable, .clickable{
+  box-shadow: 0.2rem 0.2rem 0.5rem #888;
 
   /* Make sure this div is not selectable*/
   -webkit-touch-callout: none;
@@ -40,10 +45,6 @@ h1{
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.holdable, .clickable{
-box-shadow: 0.2rem 0.2rem 0.5rem #888;
 }
 
 .holdable .text{
