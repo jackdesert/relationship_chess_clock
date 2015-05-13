@@ -14,11 +14,12 @@ var startTimer = function(totalMinutes){
   var minutesToAdd = 5
   var longClickTime = 1000 // in milliseconds
   var singlePeriod = 1000  // in milliseconds
-  var doublePeriod = singlePeriod * 2
-  var period // Will be set to either singlePeriod or doublePeriod
+  var triplePeriod = singlePeriod * 3
+  var period // Will be set to either singlePeriod or triplePeriod
   var talker = ''
   var jenniferTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var jackTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
+  var rachelTime = (totalMinutes / 2) * 60 * 1000 // in milliseconds
   var timeOfLastUpdate = null
   var buttonIsDown = false
 
@@ -31,9 +32,12 @@ var startTimer = function(totalMinutes){
       jenniferTime -= timeSinceLastUpdate
     }else if (talker === 'jack'){
       jackTime -= timeSinceLastUpdate
+    }else if (talker === 'rachel'){
+      rachelTime -= timeSinceLastUpdate
     }else if (talker === 'both'){
-      jenniferTime -= timeSinceLastUpdate/2
-      jackTime -= timeSinceLastUpdate/2
+      jenniferTime -= timeSinceLastUpdate/3
+      jackTime -= timeSinceLastUpdate/3
+      rachelTime -= timeSinceLastUpdate/3
     }
 
   }
@@ -41,8 +45,10 @@ var startTimer = function(totalMinutes){
   var display = function(){
     $('#jennifer-time').html(formattedTime(jenniferTime))
     $('#jack-time').html(formattedTime(jackTime))
+    $('#rachel-time').html(formattedTime(rachelTime))
     console.log('Jennifer has', jenniferTime / 1000)
     console.log('Jack has', jackTime / 1000)
+    console.log('Rachel has', rachelTime / 1000)
   }
 
   var zeroPad = function(number){
@@ -73,6 +79,7 @@ var startTimer = function(totalMinutes){
     var millisecondsToAdd = minutesToAdd * 60 * 1000
     jenniferTime += millisecondsToAdd
     jackTime += millisecondsToAdd
+    rachelTime += millisecondsToAdd
     display()
   }
 
@@ -81,6 +88,7 @@ var startTimer = function(totalMinutes){
   var initialize = function(){
     var $jack = $('#jack')
     var $jennifer = $('#jennifer')
+    var $rachel = $('#rachel')
     var $both = $('#both')
     var $more = $('#more')
     var $body = $('body')
@@ -104,9 +112,16 @@ var startTimer = function(totalMinutes){
       $jennifer.addClass(activeClass)
     }
 
+    var focusOnRachel = function(){
+      talker = 'rachel'
+      period = singlePeriod
+      removeActiveClass()
+      $rachel.addClass(activeClass)
+    }
+
     var focusOnBoth = function(){
       talker = 'both'
-      period = doublePeriod
+      period = triplePeriod
       removeActiveClass()
       $both.addClass(activeClass)
     }
@@ -138,6 +153,7 @@ var startTimer = function(totalMinutes){
 
     $jack.on('click', focusOnJack)
     $jennifer.on('click', focusOnJennifer)
+    $rachel.on('click', focusOnRachel)
     $both.on('click', focusOnBoth)
 
     // iOS browser (safari) does not recognize mousedown, so adding touchstart

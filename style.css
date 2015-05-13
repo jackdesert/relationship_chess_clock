@@ -74,13 +74,9 @@ h1{
 #both .text{
 }
 
-.conversationalist-holder + .conversationalist-holder{
-  float: right;
-}
-
 .conversationalist-holder{
   float: left;
-  width: 40%;
+  width: 30%;
 }
 
 .clickable, .holdable{
