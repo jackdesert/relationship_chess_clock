@@ -15,5 +15,7 @@ With a different starting time
 http://dialog.jackdesert.com/?t=25
 
 
+* Make android display stay on
+* Make holdables clickable so safari on iPhone will work
 
 
